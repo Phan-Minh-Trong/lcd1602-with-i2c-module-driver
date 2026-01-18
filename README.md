@@ -38,10 +38,10 @@
 **API (important functions)**
 - `LCD1602_I2C_Init(I2C_HandleTypeDef* hi2c)`: Initialize the PCF8574-backed LCD. Returns `HAL_StatusTypeDef` style status.
 - `LCD1602_I2C_Clear(void)`: Clear the display.
-- `LCD1602_I2C_MoveCursor(int x, int y)`: Move cursor to column `x` (0..39) and row `y` (0..1).
-- `LCD1602_I2C_ShowChar(char c)`: Write a single character at the current cursor.
+- `LCD1602_I2C_MoveCursor(int x, int y)`: Move cursor to column `x` (0..39) and row `y` (0..1). Because this only an 16x2 LCD so you have to manually guess where the next character should be placed if it is out of the display range.
+- `LCD1602_I2C_ShowChar(char c)`: Write a single character at the current cursor. After writing a character to the display, the cursor will move to the next position (default is left->right, top->bottom).
 - `LCD1602_I2C_ShowString(char* str)`: Write a null-terminated string starting at the current cursor.
-- `LCD1602_I2C_ShiftDisplay(int right)`: Shift the entire display; pass `1` to shift right, `0` to shift left.
+- `LCD1602_I2C_ShiftDisplay(int right)`: Shift the entire display; pass `1` to shift right, `0` to shift left. (The cursor will also be shifted, use LCD1602_I2C_MoveCursor to re-configure it's position).
 
 **Example (STM32 HAL)**
 ```c
